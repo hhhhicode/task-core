@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--project", "/Users/hcode/Desktop/desktop/HwangJiHun/code/task-core"
+      ]
+    }
+  }
+}
