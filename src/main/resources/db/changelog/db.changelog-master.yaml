@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/001_create_todos_table.sql
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/002_create_gantt_tasks_table.sql
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/003_create_kanban_cards_table.sql
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/010_add_deleted_at_columns.sql
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/011_add_partial_indexes.sql
+      relativeToChangelogFile: false

@@ -1,0 +1,26 @@
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  r2dbc:
+    # IntegrationTestBase @DynamicPropertySource에서 동적으로 설정됨
+    # main/resources/application.yaml의 하드코딩된 URL 오버라이드
+    url: ""
+    username: ""
+    password: ""
+    pool:
+      enabled: true
+      initial-size: 10
+      max-size: 20
+
+  datasource:
+    # Liquibase용 JDBC도 IntegrationTestBase에서 동적으로 설정됨
+    url: ""
+    username: ""
+    password: ""
+
+logging:
+  level:
+    io.hcode.task_core: DEBUG
+    org.springframework.r2dbc: DEBUG

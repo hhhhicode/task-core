@@ -1,0 +1,53 @@
+server:
+  port: 28082
+
+management:
+  otlp:
+    tracing:
+      endpoint: http://otel.hcode.ai.kr/v1/traces
+      protocol: http/protobuf
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,prometheus"
+  tracing:
+    sampling:
+      probability: 1.0
+
+# ???? ?? ?? ??
+transaction:
+  query-logging:
+    enabled: true                    # ???? ?? ???
+    log-level: debug                 # ?? ?? (debug, info, warn, error)
+    recovery-sql-enabled: true       # ?? ? ??? SQL ?? ???
+    max-transaction-history: 100     # ???? ??? ?? ???? ??
+    parameter-logging-enabled: true  # SQL ???? ?? ???
+
+spring:
+  application:
+    name: task-core
+  r2dbc:
+    url: "r2dbc:postgresql://localhost:5432/task-core"
+    username: task_app
+    password: Hjh761943!
+  # JDBC DataSource for Liquibase (마이그레이션 전용)
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/task-core"
+    username: task_app
+    password: Hjh761943!
+    driver-class-name: org.postgresql.Driver
+  jooq:
+    sql-dialect: postgres
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+  output:
+    ansi:
+      enabled: always  # 콘솔 출력 ANSI 컬러 활성화
+
+logging:
+  level:
+    root: info
+    io.hcode: debug
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr([%15.15t]){faint} %clr([%8.8X{traceId:-}-%4.4X{spanId:-}]){cyan} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"

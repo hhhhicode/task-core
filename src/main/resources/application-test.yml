@@ -1,0 +1,31 @@
+server:
+  port: 28082
+
+spring:
+  config:
+    activate:
+      on-profile: test
+  application:
+    name: task-core-test
+  r2dbc:
+    url: "r2dbc:postgresql://localhost:${TESTCONTAINERS_POSTGRES_PORT:65432}/task"
+    username: task
+    password: task
+  jooq:
+    sql-dialect: postgres
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
+
+# SSE 설정 (테스트용 - 짧은 하트비트)
+task:
+  sse:
+    heartbeat-seconds: 1
+
+logging:
+  level:
+    root: warn
+    io.hcode: info
+    org.jooq: warn
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"
